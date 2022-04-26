@@ -1,37 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import React from 'react';
 import { Memo } from '../../models';
-import { fetchMemo, deleteMemo } from '../../apis';
 import Button from '../../components/Button';
 import DateString from '../../components/DateString';
 
-type MemoParam = {
-  id: string;
+type MemoPageProps = {
+  memo?: Memo;
+  onDeleteMemo(id: number): void;
 };
 
-const MemoComponent = () => {
-  const [memo, setMemo] = useState<Memo | undefined>(undefined);
-  const { id } = useParams<MemoParam>();
-  const [deleted, setDeleted] = useState<boolean>(false);
-
-  const onDelete = () => {
-    const memoId = parseInt(id || '0', 10);
-    deleteMemo(memoId);
-    setDeleted(true);
-  };
-
-  useEffect(() => {
-    const memoId = parseInt(id || '0', 10);
-    setMemo(fetchMemo(memoId));
-  }, [id]);
-
-  if (deleted) {
-    return <Navigate to={'/memo'} />;
-  }
-
+const MemoComponent = ({ memo, onDeleteMemo }: MemoPageProps) => {
   return memo ? (
     <>
-      <Button onClick={onDelete}>Delete</Button>
+      <Button onClick={() => onDeleteMemo(memo!.id!)}>Delete</Button>
       <div
         style={{
           borderTop: '1px solid #ddd',
@@ -43,9 +23,9 @@ const MemoComponent = () => {
             marginBottom: '15px',
           }}
         >
-          {memo.createdAt && <DateString timestamp={memo.createdAt} />}
+          {memo!.createdAt && <DateString timestamp={memo!.createdAt} />}
         </div>
-        <div>{memo.content}</div>
+        <div>{memo!.content}</div>
       </div>
     </>
   ) : (

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import RemovedMemo from '../../pages/trash/RemovedMemo';
+import RemovedMemo from '../../containers/RemovedMemo';
+import RemovedMemoList from '../../containers/RemovedMemoList';
+
 const TrashRouter = () => {
-  const RenderEmptyTrash = () => <div>Trash can is empty.</div>;
   return (
     <Routes>
-      <Route path={`trash/`} element={<RenderEmptyTrash />} />
+      <Route path={`trash/`} element={<RemovedMemoList />} />
       <Route path={`:id`} element={<RemovedMemo />} />
     </Routes>
   );

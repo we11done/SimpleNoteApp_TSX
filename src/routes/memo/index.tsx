@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AddMemo from '../../pages/memo/NewMemo';
-import Memo from '../../pages/memo/Memo';
+import AddMemo from '../../containers/AddMemo';
+import Memo from '../../containers/Memo';
 
 const MemoRouter = () => {
   return (

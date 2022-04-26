@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import Sidebar, {
   SidebarTitle,
@@ -7,22 +7,19 @@ import Sidebar, {
 } from '../../components/Sidebar';
 import Main from '../../components/Main';
 import { Memo } from '../../models';
-import { fetchDeletedMemoList } from '../../apis';
 import TrashRouter from '../../routes/trash';
 import { List, ListItem } from '../../components/List';
 
-const TrashPage = () => {
-  const [memos, setMemos] = useState<Memo[]>([]);
-  const { pathname } = useLocation();
-  const hasMemos = memos.length > 0;
+type TrashPageProps = {
+  deletedMemos: Memo[];
+};
 
-  useEffect(() => {
-    setMemos(fetchDeletedMemoList());
-  }, [pathname]);
+const TrashPage = ({ deletedMemos }: TrashPageProps) => {
+  const hasMemos = deletedMemos.length > 0;
 
-  const renderMemoList = (memos: Memo[]) => (
+  const renderMemoList = (deletedMemos: Memo[]) => (
     <List>
-      {memos.map((memo, idx) => (
+      {deletedMemos.map((memo, idx) => (
         <ListItem key={idx} first={idx === 0}>
           <Link to={`/trash/${memo.id}`}>{memo.content.substring(0, 15)}</Link>
         </ListItem>
@@ -35,11 +32,22 @@ const TrashPage = () => {
       <Sidebar>
         <SidebarBackButton to='/' />
         <SidebarTitle>Trash</SidebarTitle>
-        {hasMemos && renderMemoList(memos)}
+        {hasMemos && renderMemoList(deletedMemos)}
       </Sidebar>
       <Main>
-        {!hasMemos && <p>Trash can is empty.</p>}
-        <div style={{ margin: '10px' }}>
+        <div style={{ margin: '10px', position: 'relative' }}>
+          {!hasMemos && (
+            <p
+              style={{
+                position: 'absolute',
+                top: '50px',
+                left: '45%',
+                textAlign: 'center',
+              }}
+            >
+              Trash can is empty.
+            </p>
+          )}
           <TrashRouter />
         </div>
       </Main>

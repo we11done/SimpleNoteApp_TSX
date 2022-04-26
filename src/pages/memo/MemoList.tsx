@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Sidebar, {
   SidebarTitle,
@@ -9,17 +9,15 @@ import Main from '../../components/Main';
 import AddMemoBtn from '../../components/AddMenuBtn';
 import MemoRouter from '../../routes/memo';
 import { Memo } from '../../models';
-import { fetchMemoList } from '../../apis';
 import { List, ListItem } from '../../components/List';
 
-const MemoPage = () => {
-  const [memos, setMemos] = useState<Memo[]>([]);
+type MemoListProps = {
+  memos: Memo[];
+};
+
+const MemoPage = ({ memos }: MemoListProps) => {
   const { pathname } = useLocation();
   const hasMemos = memos.length > 0;
-
-  useEffect(() => {
-    setMemos(fetchMemoList());
-  }, [pathname]);
 
   const renderMemoList = (memos: Memo[]) => {
     return (
@@ -41,9 +39,20 @@ const MemoPage = () => {
         {hasMemos && renderMemoList(memos)}
       </Sidebar>
       <Main>
-        <div style={{ margin: '10px' }}>
+        <div style={{ margin: '10px', position: 'relative' }}>
           {pathname !== '/memo/add' && <AddMemoBtn />}
-          {!hasMemos && pathname !== '/memo/add' && <p>Create Memo</p>}
+          {!hasMemos && pathname !== '/memo/add' && (
+            <p
+              style={{
+                position: 'absolute',
+                top: '50px',
+                left: '45%',
+                textAlign: 'center',
+              }}
+            >
+              Create Memo
+            </p>
+          )}
           <MemoRouter />
         </div>
       </Main>

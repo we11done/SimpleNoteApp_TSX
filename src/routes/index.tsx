@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from '../pages/home';
-import Memo from '../pages/memo';
-import Trash from '../pages/trash';
+import Home from '../containers/Home';
+import Memo from '../containers/MemoList';
+import Trash from '../containers/RemovedMemoList';
 
 const RootRouter = () => (
   <BrowserRouter>
