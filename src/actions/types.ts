@@ -1,0 +1,1 @@
+export const FETCH_MEMO_LIST = 'FETCH_MEMO_LIST';
