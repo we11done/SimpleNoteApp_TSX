@@ -11,6 +11,7 @@ type SidebarBackButtonProps = {
 
 const style: React.CSSProperties = {
   width: '200px',
+  height: '100%',
   border: 'solid 1px #ccc',
   marginRight: '10px',
   borderRadius: '4px',

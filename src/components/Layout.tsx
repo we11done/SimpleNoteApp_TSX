@@ -7,7 +7,8 @@ type LayoutProps = {
 const style: React.CSSProperties = {
   display: 'flex',
   flex: 1,
-  margin: '10px',
+  height: '500px',
+  margin: '30px 20px',
 };
 
 const Layout = ({ children }: LayoutProps) => {
