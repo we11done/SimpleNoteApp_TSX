@@ -4,6 +4,8 @@ updates:
     directory: '/' # Location of package manifests
     schedule:
       interval: 'daily'
+      time: '12:37'
+      timezone: 'America/Toronto'
     commit-message:
       prefix: 'yarn' # Prefix all commit messages with "Composer"
       include: 'scope' # Specifies that any prefix is followed by a list of the dependencies updated in the commit.
