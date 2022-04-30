@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: 'yarn' # See documentation for possible values
+    directory: '/' # Location of package manifests
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'yarn' # Prefix all commit messages with "Composer"
+      include: 'scope' # Specifies that any prefix is followed by a list of the dependencies updated in the commit.
+    ignore:
+      - dependency-name: 'web-vitals' # For web-vital, ignore all updates
+      - dependency-name: '@redux-toolkit' # For @redux-toolkit, ignore all updates for version 1
+        versions: ['1.x']
+    reviewers:
+      - 'we11done'
