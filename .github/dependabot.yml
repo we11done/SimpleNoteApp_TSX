@@ -13,5 +13,3 @@ updates:
       - dependency-name: 'web-vitals' # For web-vital, ignore all updates
       - dependency-name: '@redux-toolkit' # For @redux-toolkit, ignore all updates for version 1
         versions: ['1.x']
-    reviewers:
-      - 'we11done'
