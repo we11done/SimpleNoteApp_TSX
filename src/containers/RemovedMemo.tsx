@@ -9,12 +9,11 @@ import {
 } from '../actions';
 import { Dispatch, bindActionCreators } from 'redux';
 import { useParams, Navigate } from 'react-router-dom';
-import { Memo } from '../models';
 import { RootState } from '../reducers';
 import RemoveMemo from '../pages/trash/RemovedMemo';
 
 type Props = {
-  fetchMemo(memo: Memo): FetchMemoAction;
+  fetchMemo(id: number): FetchMemoAction;
   restoreMemo(id: number): RestoreMemoAction;
 };
 
@@ -34,8 +33,7 @@ const RemovedMemoContainer = ({ fetchMemo, restoreMemo }: Props) => {
   useEffect(() => {
     if (!id) return;
     const memoId = parseInt(id, 10);
-    const memo = api.fetchMemo(memoId);
-    if (memo) fetchMemo(memo);
+    if (!isNaN(memoId)) fetchMemo(memoId);
   }, [id, fetchMemo]);
 
   const onRestore = (id: number) => {
