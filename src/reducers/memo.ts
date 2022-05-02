@@ -19,12 +19,12 @@ const memoReducer = (
   switch (type) {
     case types.FETCH_MEMO_LIST_SUCCESS:
       return { ...state, memos: payload.map(memo => ({ ...memo })) };
-    case types.FETCH_DELETED_MEMO_LIST:
+    case types.FETCH_DELETED_MEMO_LIST_SUCCESS:
       return {
         ...state,
         deletedMemos: payload,
       };
-    case types.FETCH_MEMO:
+    case types.FETCH_MEMO_SUCCESS:
       return {
         ...state,
         memos: state.memos.map((memo: Memo) => {
@@ -32,17 +32,17 @@ const memoReducer = (
           return { ...payload };
         }),
       };
-    case types.DELETE_MEMO:
+    case types.DELETE_MEMO_SUCCESS:
       return {
         ...state,
         memos: state.memos.filter((memo: Memo) => memo.id !== payload),
       };
-    case types.ADD_MEMO:
+    case types.ADD_MEMO_SUCESSS:
       return {
         ...state,
         memos: [payload, ...state.memos],
       };
-    case types.RESTORE_MEMO:
+    case types.RESTORE_MEMO_SUCCESS:
       return {
         ...state,
         deletedMemos: state.memos.filter((memo: Memo) => memo.id !== payload),
