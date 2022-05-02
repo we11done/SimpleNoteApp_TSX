@@ -17,8 +17,8 @@ const memoReducer = (
   { type, payload }: MemoActionTypes
 ): MemoState => {
   switch (type) {
-    case types.FETCH_MEMO_LIST:
-      return { ...state, memos: payload };
+    case types.FETCH_MEMO_LIST_SUCCESS:
+      return { ...state, memos: payload.map(memo => ({ ...memo })) };
     case types.FETCH_DELETED_MEMO_LIST:
       return {
         ...state,

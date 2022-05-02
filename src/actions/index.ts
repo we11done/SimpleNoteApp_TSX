@@ -2,7 +2,11 @@ import * as types from './types';
 import { Memo } from '../models';
 
 export type FetchMemoListAction = {
-  type: typeof types.FETCH_MEMO_LIST;
+  type: typeof types.FETCH_MEMO_LIST_REQUEST;
+};
+
+export type FetchMemoListSuccessAction = {
+  type: typeof types.FETCH_MEMO_LIST_SUCCESS;
   payload: Memo[];
 };
 
@@ -32,8 +36,7 @@ export type RestoreMemoAction = {
 };
 
 export const fetchMemoList = (memos: Memo[]): FetchMemoListAction => ({
-  type: types.FETCH_MEMO_LIST,
-  payload: memos,
+  type: types.FETCH_MEMO_LIST_REQUEST,
 });
 
 export const fetchMemo = (memo: Memo): FetchMemoAction => ({
@@ -64,7 +67,7 @@ export const restoreMemo = (id: number): RestoreMemoAction => ({
 });
 
 export type MemoActionTypes =
-  | FetchMemoListAction
+  | FetchMemoListSuccessAction
   | FetchMemoAction
   | AddMemoAction
   | FetchDeletedMemoListAction
