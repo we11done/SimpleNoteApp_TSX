@@ -62,7 +62,10 @@ function* addMemo$(action: AddMemoAction) {
     });
     yield take(types.CONFIRM_DIALOG);
   } catch (err) {
-    console.log(err);
+    yield put({
+      type: types.ADD_MEMO_FAILURE,
+      payload: 'Failed to add the memo',
+    });
   }
 }
 
