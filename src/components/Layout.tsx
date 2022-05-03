@@ -1,4 +1,5 @@
 import React from 'react';
+import DialogContainer from '../containers/Dialog';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -12,7 +13,12 @@ const style: React.CSSProperties = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  return <div style={style}>{children}</div>;
+  return (
+    <>
+      <DialogContainer />
+      <div style={style}>{children}</div>
+    </>
+  );
 };
 
 export default Layout;
