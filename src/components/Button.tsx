@@ -6,15 +6,20 @@ type ButtonProps = {
   primary?: boolean;
   children?: React.ReactNode;
   onClick?(): void;
+  disabled?: boolean;
 };
 
 const Button = (props: ButtonProps) => {
-  const { to, children, primary, onClick } = props;
+  const { to, children, primary, onClick, disabled } = props;
   const isLink = !!to;
 
   const renderButton = () => {
     return (
-      <button style={buttonStyle(!!primary)} onClick={onClick}>
+      <button
+        disabled={disabled}
+        style={buttonStyle(!!primary)}
+        onClick={onClick}
+      >
         {children}
       </button>
     );
