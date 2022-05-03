@@ -1,5 +1,5 @@
 import * as types from './types';
-import { Memo } from '../models';
+import { Dialog, Memo } from '../models';
 
 // FETCH MEMO LIST Actions
 export type FetchMemoListAction = {
@@ -65,7 +65,26 @@ export type RestoreMemoSuccessAction = {
   payload: number;
 };
 
-export const fetchMemoList = (memos: Memo[]): FetchMemoListAction => ({
+// CLEAR API CALL Action
+export type ClearApiCallStatusAction = {
+  type: typeof types.CLEAR_API_CALL_STATUS;
+};
+
+// DIALOG Actions
+export type ShowDialogAction = {
+  type: typeof types.SHOW_DIALOG;
+  payload: Dialog;
+};
+
+export type ConfirmDialogAction = {
+  type: typeof types.CONFIRM_DIALOG;
+};
+
+export type CancelDialogAction = {
+  type: typeof types.CANCEL_DIALOG;
+};
+
+export const fetchMemoList = (): FetchMemoListAction => ({
   type: types.FETCH_MEMO_LIST_REQUEST,
 });
 
@@ -93,6 +112,19 @@ export const restoreMemo = (id: number): RestoreMemoAction => ({
   payload: id,
 });
 
+export const showDialog = (dialog: Dialog): ShowDialogAction => ({
+  type: types.SHOW_DIALOG,
+  payload: dialog,
+});
+
+export const confirmDialog = (): ConfirmDialogAction => ({
+  type: types.CONFIRM_DIALOG,
+});
+
+export const cancelDialog = (): CancelDialogAction => ({
+  type: types.CANCEL_DIALOG,
+});
+
 export type MemoActionTypes =
   | FetchMemoListSuccessAction
   | FetchMemoSuccessAction
@@ -100,3 +132,12 @@ export type MemoActionTypes =
   | FetchDeletedMemoListSuccessAction
   | DeleteMemoSuccessAction
   | RestoreMemoSuccessAction;
+
+export type AppActionTypes =
+  | ClearApiCallStatusAction
+  | FetchMemoListAction
+  | AddMemoAction
+  | DeleteMemoAction
+  | ShowDialogAction
+  | ConfirmDialogAction
+  | CancelDialogAction;
