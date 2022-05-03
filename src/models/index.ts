@@ -9,3 +9,8 @@ export type Dialog = {
   type: 'alter' | 'confirm';
   text: string;
 };
+
+export type Toast = {
+  id: number;
+  text: string;
+};
