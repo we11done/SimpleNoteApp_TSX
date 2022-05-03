@@ -1,15 +1,17 @@
 import { AppActionTypes } from '../actions';
 import * as types from '../actions/types';
-import { Dialog } from '../models';
+import { Dialog, Toast } from '../models';
 
 export type AppState = {
   apiCalling: boolean;
   dialog?: Dialog;
+  toasts: Toast[];
 };
 
 const initialState: AppState = {
   apiCalling: true,
   dialog: undefined,
+  toasts: [],
 };
 
 const appReducer = (
@@ -37,6 +39,16 @@ const appReducer = (
       return {
         ...state,
         dialog: undefined,
+      };
+    case types.ADD_TOAST:
+      return {
+        ...state,
+        toasts: [...state.toasts, action.payload],
+      };
+    case types.REMOVE_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.filter(toast => toast.id !== action.payload),
       };
     default:
       return state;
