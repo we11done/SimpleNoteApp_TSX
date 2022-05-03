@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Memo } from '../models';
-import * as api from '../apis';
 import { FetchMemoListAction, fetchMemoList } from '../actions';
 import { connect } from 'react-redux';
 import { RootState } from '../reducers';
@@ -8,19 +7,23 @@ import { bindActionCreators, Dispatch } from 'redux';
 import MemoList from '../pages/memo/MemoList';
 
 type Props = {
+  apiCalling: boolean;
   memos: Memo[];
-  fetchMemoList(memos: Memo[]): FetchMemoListAction;
+  fetchMemoList(): FetchMemoListAction;
 };
 
-const MemoListContainer = ({ memos, fetchMemoList }: Props) => {
+const MemoListContainer = ({ memos, fetchMemoList, apiCalling }: Props) => {
   useEffect(() => {
-    fetchMemoList(api.fetchMemoList());
+    fetchMemoList();
   }, [fetchMemoList]);
 
-  return <MemoList memos={memos} />;
+  return <MemoList memos={memos} apiCalling={apiCalling} />;
 };
 
-const mapStateToProps = (state: RootState) => ({ memos: state.memo.memos });
+const mapStateToProps = (state: RootState) => ({
+  memos: state.memo.memos,
+  apiCalling: state.app.apiCalling,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({ fetchMemoList }, dispatch);
