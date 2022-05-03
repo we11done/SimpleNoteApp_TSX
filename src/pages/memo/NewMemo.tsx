@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Button from '../../components/Button';
 
 type NewMemoProps = {
+  apiCalling: boolean;
   handleClickSave(input: string): void;
 };
 
-const NewMemo = ({ handleClickSave }: NewMemoProps) => {
+const NewMemo = ({ handleClickSave, apiCalling }: NewMemoProps) => {
   const [value, setValue] = useState<string>('');
 
   const handleChange = (e: React.FormEvent<HTMLTextAreaElement>) =>
@@ -29,6 +30,7 @@ const NewMemo = ({ handleClickSave }: NewMemoProps) => {
       </form>
       <Button to='/memo'>Back</Button>
       <Button
+        disabled={apiCalling}
         onClick={() => {
           handleClickSave(value);
         }}
