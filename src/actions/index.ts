@@ -1,5 +1,5 @@
 import * as types from './types';
-import { Dialog, Memo } from '../models';
+import { Dialog, Memo, Toast } from '../models';
 
 // FETCH MEMO LIST Actions
 export type FetchMemoListAction = {
@@ -84,6 +84,22 @@ export type CancelDialogAction = {
   type: typeof types.CANCEL_DIALOG;
 };
 
+// TOAST Actions
+export type ShowToastAction = {
+  type: typeof types.SHOW_TOAST;
+  payload: string;
+};
+
+export type AddToastAction = {
+  type: typeof types.ADD_TOAST;
+  payload: Toast;
+};
+
+export type RemoveToastAction = {
+  type: typeof types.REMOVE_TOAST;
+  payload: number;
+};
+
 export const fetchMemoList = (): FetchMemoListAction => ({
   type: types.FETCH_MEMO_LIST_REQUEST,
 });
@@ -140,4 +156,7 @@ export type AppActionTypes =
   | DeleteMemoAction
   | ShowDialogAction
   | ConfirmDialogAction
-  | CancelDialogAction;
+  | CancelDialogAction
+  | AddToastAction
+  | RemoveToastAction
+  | ShowToastAction;
