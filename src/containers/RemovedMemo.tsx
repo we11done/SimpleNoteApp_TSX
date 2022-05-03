@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
-import * as api from '../apis';
 import {
   fetchMemo,
   FetchMemoAction,
@@ -37,7 +36,6 @@ const RemovedMemoContainer = ({ fetchMemo, restoreMemo }: Props) => {
   }, [id, fetchMemo]);
 
   const onRestore = (id: number) => {
-    api.restoreMemo(id);
     restoreMemo(id);
     setRestored(true);
   };
