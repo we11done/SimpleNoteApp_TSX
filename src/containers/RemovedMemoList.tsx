@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import * as api from '../apis';
 import { fetchDeletedMemoList, FetchDeletedMemoListAction } from '../actions';
 import { Memo } from '../models';
 import { useLocation } from 'react-router-dom';
@@ -10,7 +9,7 @@ import RemovedMemoList from '../pages/trash/RemovedMemoList';
 
 type Props = {
   deletedMemos: Memo[];
-  fetchDeletedMemoList(memos: Memo[]): FetchDeletedMemoListAction;
+  fetchDeletedMemoList(): FetchDeletedMemoListAction;
 };
 
 const RemovedMemoListContainer = ({
@@ -20,8 +19,7 @@ const RemovedMemoListContainer = ({
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const deletedMemos = api.fetchDeletedMemoList();
-    fetchDeletedMemoList(deletedMemos);
+    fetchDeletedMemoList();
   }, [fetchDeletedMemoList, pathname]);
 
   return <RemovedMemoList deletedMemos={deletedMemos} />;
