@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import * as api from '../apis';
 import { useParams, Navigate } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
@@ -37,7 +36,6 @@ const MemoContainer = ({ fetchMemo, deleteMemo }: Props) => {
   }, [id, fetchMemo]);
 
   const onDeleteMemo = (id: number) => {
-    api.deleteMemo(id);
     deleteMemo(id);
     setMemoDeleted(true);
   };
