@@ -1,5 +1,6 @@
 import React from 'react';
 import DialogContainer from '../containers/Dialog';
+import ToastListContainer from '../containers/ToastList';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <DialogContainer />
+      <ToastListContainer />
       <div style={style}>{children}</div>
     </>
   );
