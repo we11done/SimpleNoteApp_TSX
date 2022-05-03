@@ -4,6 +4,7 @@ import Sidebar, {
   SidebarTitle,
   SidebarBackButton,
 } from '../../components/Sidebar';
+import Skelton from '../../components/Skelton';
 import Layout from '../../components/Layout';
 import Main from '../../components/Main';
 import AddMemoBtn from '../../components/AddMenuBtn';
@@ -12,10 +13,11 @@ import { Memo } from '../../models';
 import { List, ListItem } from '../../components/List';
 
 type MemoListProps = {
+  apiCalling: boolean;
   memos: Memo[];
 };
 
-const MemoPage = ({ memos }: MemoListProps) => {
+const MemoPage = ({ memos, apiCalling }: MemoListProps) => {
   const { pathname } = useLocation();
   const hasMemos = memos.length > 0;
 
@@ -36,7 +38,11 @@ const MemoPage = ({ memos }: MemoListProps) => {
       <Sidebar>
         <SidebarBackButton to='/' />
         <SidebarTitle>Memo</SidebarTitle>
-        {hasMemos && renderMemoList(memos)}
+        {apiCalling ? (
+          <Skelton style={{ margin: '10px' }} />
+        ) : hasMemos ? (
+          renderMemoList(memos)
+        ) : null}
       </Sidebar>
       <Main>
         <div style={{ margin: '10px', position: 'relative' }}>
