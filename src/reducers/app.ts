@@ -20,6 +20,9 @@ const appReducer = (
 ): AppState => {
   switch (action.type) {
     case types.FETCH_MEMO_LIST_REQUEST:
+    case types.FETCH_DELETED_MEMO_LIST_REQUEST:
+    case types.ADD_MEMO_REQUEST:
+    case types.DELETE_MEMO_REQUEST:
       return {
         ...state,
         apiCalling: true,
