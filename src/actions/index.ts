@@ -152,6 +152,7 @@ export type MemoActionTypes =
 export type AppActionTypes =
   | ClearApiCallStatusAction
   | FetchMemoListAction
+  | FetchDeletedMemoListAction
   | AddMemoAction
   | DeleteMemoAction
   | ShowDialogAction
