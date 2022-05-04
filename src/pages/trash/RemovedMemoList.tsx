@@ -9,12 +9,14 @@ import Main from '../../components/Main';
 import { Memo } from '../../models';
 import TrashRouter from '../../routes/trash';
 import { List, ListItem } from '../../components/List';
+import Skelton from '../../components/Skelton';
 
 type TrashPageProps = {
+  apiCalling: boolean;
   deletedMemos: Memo[];
 };
 
-const TrashPage = ({ deletedMemos }: TrashPageProps) => {
+const TrashPage = ({ deletedMemos, apiCalling }: TrashPageProps) => {
   const hasMemos = deletedMemos.length > 0;
 
   const renderMemoList = (deletedMemos: Memo[]) => (
@@ -32,7 +34,11 @@ const TrashPage = ({ deletedMemos }: TrashPageProps) => {
       <Sidebar>
         <SidebarBackButton to='/' />
         <SidebarTitle>Trash</SidebarTitle>
-        {hasMemos && renderMemoList(deletedMemos)}
+        {apiCalling ? (
+          <Skelton style={{ margin: '10px' }} />
+        ) : hasMemos ? (
+          renderMemoList(deletedMemos)
+        ) : null}
       </Sidebar>
       <Main>
         <div style={{ margin: '10px', position: 'relative' }}>

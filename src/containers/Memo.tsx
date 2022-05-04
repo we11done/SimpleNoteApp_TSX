@@ -12,6 +12,7 @@ import { RootState } from '../reducers';
 import MemoPage from '../pages/memo/Memo';
 
 type Props = {
+  apiCalling: boolean;
   fetchMemo(id: number): FetchMemoAction;
   deleteMemo(id: number): DeleteMemoAction;
 };
@@ -20,7 +21,7 @@ type MemoParam = {
   id: string;
 };
 
-const MemoContainer = ({ fetchMemo, deleteMemo }: Props) => {
+const MemoContainer = ({ fetchMemo, deleteMemo, apiCalling }: Props) => {
   const [isMemoDeleted, setMemoDeleted] = useState<boolean>(false);
   const { id } = useParams<MemoParam>();
   const memo = useSelector((state: RootState) => {
@@ -41,11 +42,15 @@ const MemoContainer = ({ fetchMemo, deleteMemo }: Props) => {
   };
 
   if (isMemoDeleted) return <Navigate to='/memo' />;
-  if (!memo) return <p>404: Not Found</p>;
+  if (!memo && !apiCalling) return <p>404: Not Found</p>;
   return <MemoPage memo={memo} onDeleteMemo={onDeleteMemo} />;
 };
+
+const mapStateToProps = (state: RootState) => ({
+  apiCalling: state.app.apiCalling,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({ fetchMemo, deleteMemo }, dispatch);
 
-export default connect(null, mapDispatchToProps)(MemoContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MemoContainer);

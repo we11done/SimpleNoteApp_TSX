@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { fetchDeletedMemoList, FetchDeletedMemoListAction } from '../actions';
 import { Memo } from '../models';
-import { useLocation } from 'react-router-dom';
 import { RootState } from '../reducers';
 import RemovedMemoList from '../pages/trash/RemovedMemoList';
 
 type Props = {
+  apiCalling: boolean;
   deletedMemos: Memo[];
   fetchDeletedMemoList(): FetchDeletedMemoListAction;
 };
@@ -15,17 +15,19 @@ type Props = {
 const RemovedMemoListContainer = ({
   deletedMemos,
   fetchDeletedMemoList,
+  apiCalling,
 }: Props) => {
-  const { pathname } = useLocation();
-
   useEffect(() => {
     fetchDeletedMemoList();
-  }, [fetchDeletedMemoList, pathname]);
+  }, [fetchDeletedMemoList]);
 
-  return <RemovedMemoList deletedMemos={deletedMemos} />;
+  return (
+    <RemovedMemoList deletedMemos={deletedMemos} apiCalling={apiCalling} />
+  );
 };
 
 const mapStateToProps = (state: RootState) => ({
+  apiCalling: state.app.apiCalling,
   deletedMemos: state.memo.deletedMemos,
 });
 
