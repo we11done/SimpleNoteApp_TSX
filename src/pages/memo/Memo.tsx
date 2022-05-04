@@ -29,7 +29,14 @@ const MemoComponent = ({ memo, onDeleteMemo }: MemoPageProps) => {
       </div>
     </>
   ) : (
-    <>Loading...</>
+    <div
+      style={{
+        borderTop: '1px solid #ddd',
+        paddingTop: '10px',
+      }}
+    >
+      <div>Loading...</div>
+    </div>
   );
 };
 

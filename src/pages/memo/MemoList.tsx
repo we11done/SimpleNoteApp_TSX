@@ -47,7 +47,7 @@ const MemoPage = ({ memos, apiCalling }: MemoListProps) => {
       <Main>
         <div style={{ margin: '10px', position: 'relative' }}>
           {pathname !== '/memo/add' && <AddMemoBtn />}
-          {!hasMemos && pathname !== '/memo/add' && (
+          {!hasMemos && pathname !== '/memo/add' && !apiCalling && (
             <p
               style={{
                 position: 'absolute',
