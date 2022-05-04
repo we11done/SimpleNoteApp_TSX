@@ -38,11 +38,13 @@ const memoReducer = (
         memos: state.memos.filter((memo: Memo) => memo.id !== payload),
       };
     case types.ADD_MEMO_SUCESSS:
+      if (!payload) return state;
       return {
         ...state,
         memos: [payload, ...state.memos],
       };
     case types.RESTORE_MEMO_SUCCESS:
+      if (!payload) return state;
       return {
         ...state,
         deletedMemos: state.memos.filter((memo: Memo) => memo.id !== payload),
